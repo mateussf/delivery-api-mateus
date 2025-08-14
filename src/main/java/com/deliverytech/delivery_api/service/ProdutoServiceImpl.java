@@ -42,8 +42,8 @@ public class ProdutoServiceImpl implements ProdutoService {
         produto.setDisponivel(produtoDTO.isDisponivel());
         repository.save(produto);
         return produtoDTO;
-
     }
+
     @Override
     public List<ProdutoDTO> buscarProdutosPorRestaurante(Long restauranteId) {
         // TODO Auto-generated method stub
