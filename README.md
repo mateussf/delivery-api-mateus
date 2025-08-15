@@ -33,5 +33,5 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 - Profile: development
 
 ## 👨‍💻 Desenvolvedor
-[Seu Nome] - [Sua Turma]
+Mateus Segalla Franco - SDE TI 58B
 Desenvolvido com JDK 21 e Spring Boot 3.2.x
