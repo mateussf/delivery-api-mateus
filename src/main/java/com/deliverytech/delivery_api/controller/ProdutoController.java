@@ -46,6 +46,12 @@ public class ProdutoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(id);
     }
 
+    @GetMapping("produto/categoria/{categoria}")
+    public ResponseEntity<ProdutoDTO> buscarProdutosPorCategoria(String categoria) {
+        ProdutoDTO produto = produtoService.buscarProdutosPorCategoria(categoria);
+        return ResponseEntity.ok(produto);
+    }
+
     @PatchMapping("/produto/{id}")
     public ResponseEntity<ProdutoDTO> atualizarProduto(Long id, @RequestBody ProdutoDTO dto) {
         ProdutoDTO produtoAtualizado = produtoService.atualizarProduto(id, dto);

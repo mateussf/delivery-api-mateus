@@ -33,5 +33,5 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 - Profile: development
 
 ## 👨‍💻 Desenvolvedor
-Mateus Segalla Franco - SDE TI 58B
+Mateus Segalla Franco - SDE TI 58B 02728 - Arquitetura de sistemas
 Desenvolvido com JDK 21 e Spring Boot 3.2.x

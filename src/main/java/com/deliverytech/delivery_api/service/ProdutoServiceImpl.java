@@ -64,14 +64,18 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Override
     public ProdutoDTO buscarProdutosPorCategoria(String categoria) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarProdutosPorCategoria'");
+        List<ProdutoModel> produtos = repository.findByCategoria(categoria);
+        if (produtos.isEmpty()) {
+            throw new EntityNotFoundException("Nenhum produto encontrado na categoria: " + categoria);
+        }
+        ModelMapper modelMapper = new ModelMapper();
+        return modelMapper.map(produtos.get(0), ProdutoDTO.class); // Retorna o primeiro produto encontrado
     }
 
     @Override
     public List<ProdutoDTO> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findAll'");
+        ModelMapper modelMapper = new ModelMapper();
+        return repository.findAll().stream().map(product -> modelMapper.map(product, ProdutoDTO.class)).collect(Collectors.toList());
     }
 
 }

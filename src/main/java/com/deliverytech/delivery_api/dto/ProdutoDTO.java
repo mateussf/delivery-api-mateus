@@ -15,4 +15,6 @@ public class ProdutoDTO {
     private String categoria;
     private boolean disponivel;
 
+
+
 }
