@@ -1,5 +1,5 @@
 package com.deliverytech.delivery.service;
 
-public interface RestauranteService {
+public interface IRestauranteService {
 
 }

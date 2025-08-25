@@ -19,6 +19,8 @@ public class ClienteRepositoryImpl implements IClienteRepositoryCustom {
         return query.getSingleResult();
     }
 
+
+
     @Override
     public boolean existsByEmail(String email) {
         return false;//repository.existsByEmail(email);

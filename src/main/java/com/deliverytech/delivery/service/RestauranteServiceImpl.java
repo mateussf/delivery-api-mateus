@@ -13,7 +13,7 @@ import com.deliverytech.delivery.model.RestauranteModel;
 import com.deliverytech.delivery.repository.IRestauranteRepository;
 
 @Service
-public class RestauranteServiceImpl implements RestauranteService {
+public class RestauranteServiceImpl implements IRestauranteService {
     @Autowired
     private IRestauranteRepository repository;
 

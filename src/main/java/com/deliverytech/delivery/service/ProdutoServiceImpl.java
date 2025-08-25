@@ -17,7 +17,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 
 @Service
-public class ProdutoServiceImpl implements ProdutoService {
+public class ProdutoServiceImpl implements IProdutoService {
     @Autowired
     private IProdutoRepository repository;
 

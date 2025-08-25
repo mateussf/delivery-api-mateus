@@ -5,7 +5,7 @@ import java.util.List;
 import com.deliverytech.delivery.dto.PedidoDTO;
 import com.deliverytech.delivery.model.PedidoModel;
 
-public interface PedidoService {
+public interface IPedidoService {
 
     public PedidoModel create(PedidoModel pedido);
     public PedidoModel update(PedidoModel pedido);

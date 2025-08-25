@@ -9,13 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.deliverytech.delivery.dto.ProdutoDTO;
-import com.deliverytech.delivery.service.ProdutoService;
+import com.deliverytech.delivery.service.IProdutoService;
 
 import org.springframework.web.bind.annotation.RequestBody;
 //import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -28,10 +29,10 @@ import org.modelmapper.ModelMapper;
 @Controller
 @RequestMapping("/api/produtos")
 public class ProdutoController {
-    private final ProdutoService produtoService;
+    private final IProdutoService produtoService;
 
     @Autowired
-    public ProdutoController(ProdutoService produtoService) {
+    public ProdutoController(IProdutoService produtoService) {
         this.produtoService = produtoService;
     }
 
@@ -53,7 +54,7 @@ public class ProdutoController {
     }
 
     @PatchMapping("/produto/{id}")
-    public ResponseEntity<ProdutoDTO> atualizarProduto(Long id, @RequestBody ProdutoDTO dto) {
+    public ResponseEntity<ProdutoDTO> atualizarProduto(@PathVariable Long id, @RequestBody ProdutoDTO dto) {
         ProdutoDTO produtoAtualizado = produtoService.atualizarProduto(id, dto);
         return ResponseEntity.ok(produtoAtualizado);
     }

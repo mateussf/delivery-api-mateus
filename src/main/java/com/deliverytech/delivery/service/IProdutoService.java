@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.deliverytech.delivery.dto.ProdutoDTO;
 
-public interface ProdutoService {
+public interface IProdutoService {
     public List<ProdutoDTO> buscarProdutosPorRestaurante(Long restauranteId);
     public ProdutoDTO buscarProdutoPorId(Long id);
     public ProdutoDTO alterarDisponibilidade(Long id, boolean disponivel);

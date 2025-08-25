@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class PedidoServiceImpl implements PedidoService {
+public class PedidoServiceImpl implements IPedidoService {
 
     @Autowired
     private IPedidoRepository repository;

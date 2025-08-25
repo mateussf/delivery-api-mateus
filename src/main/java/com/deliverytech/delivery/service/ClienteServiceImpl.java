@@ -1,11 +1,11 @@
 package com.deliverytech.delivery.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.integration.IntegrationProperties.RSocket.Client;
 import org.springframework.stereotype.Service;
 
 import com.deliverytech.delivery.dto.ClienteDTO;
@@ -15,7 +15,7 @@ import com.deliverytech.delivery.repository.IClienteRepository;
 
 
 @Service
-public class ClienteServiceImpl implements ClienteService {
+public class ClienteServiceImpl implements IClienteService {
 
     @Autowired
     private IClienteRepository repository;
@@ -48,10 +48,37 @@ public class ClienteServiceImpl implements ClienteService {
 
     }
 
+    public ClienteDTO findById(Long id) {
+        ClienteModel cliente = repository.findById(id).orElseThrow();
+        ModelMapper modelMapper = new ModelMapper();
+        ClienteDTO dto = modelMapper.map(cliente, ClienteDTO.class);
+        return dto;
+    }
+
 
     public List<ClienteDTO> findAll() {
         return repository.findAll().stream().map(this::ConvertEntityToDTO).collect(Collectors.toList());
     }
+
+    public ClienteDTO alterarCliente(Long id, ClienteDTO request) {
+        ModelMapper modelMapper = new ModelMapper();
+
+        ClienteModel clienteCadastrado = repository.findById(id).orElseThrow();
+        modelMapper.map(request, clienteCadastrado);
+        ClienteModel clienteSalvo = repository.save(clienteCadastrado);
+        return modelMapper.map(clienteSalvo, ClienteDTO.class);
+    }
+
+    public String desativarCliente(Long id) {
+        ClienteModel clienteCadastrado = repository.findById(id).orElseThrow();
+        clienteCadastrado.setAtivo(false);
+        repository.save(clienteCadastrado);
+        return "Inativado com sucesso!";
+    }
+
+
+
+
 
 
     private ClienteDTO ConvertEntityToDTO(ClienteModel entity)
