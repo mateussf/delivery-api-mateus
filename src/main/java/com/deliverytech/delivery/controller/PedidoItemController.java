@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.deliverytech.delivery.dto.PedidoItemDTO;
-import com.deliverytech.delivery.service.PedidoItemService;
+import com.deliverytech.delivery.service.PedidoItemServiceImpl;
 
 @CrossOrigin(origins = "*")
 @Controller
 public class PedidoItemController {
-    private final PedidoItemService pedidoItemService;
+    private final PedidoItemServiceImpl pedidoItemService;
 
-    public PedidoItemController(PedidoItemService pedidoItemService) {
+    public PedidoItemController(PedidoItemServiceImpl pedidoItemService) {
         this.pedidoItemService = pedidoItemService;
     }
 

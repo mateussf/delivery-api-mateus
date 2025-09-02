@@ -1,6 +1,6 @@
 package com.deliverytech.delivery.model;
 
-import java.math.BigDecimal;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,33 +8,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Data
-@Table(name = "pedidoitem")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "categoria_produto")
 
-public class PedidoItemModel {
+public class CategoriaModel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String descricao;
+    private boolean ativo;
 
-    private int quantidade;
-    private BigDecimal precoUnitario;
-    private BigDecimal subtotal;
-    //private int pedido_id;
-
-    @ManyToOne
-    @JoinColumn(name = "pedido_id")
-    private PedidoModel pedido;
-
-    @ManyToOne
-    @JoinColumn(name = "produto_id")
-    private ProdutoModel produto;
 }

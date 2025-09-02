@@ -3,32 +3,52 @@ package com.deliverytech.delivery.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.deliverytech.delivery.dto.PedidoDTO;
+import com.deliverytech.delivery.model.ClienteModel;
 import com.deliverytech.delivery.model.PedidoModel;
+import com.deliverytech.delivery.model.ProdutoModel;
+import com.deliverytech.delivery.model.RestauranteModel;
+import com.deliverytech.delivery.repository.IClienteRepository;
+import com.deliverytech.delivery.repository.IPedidoItemRepository;
 import com.deliverytech.delivery.repository.IPedidoRepository;
+import com.deliverytech.delivery.repository.IRestauranteRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class PedidoServiceImpl implements IPedidoService {
 
-    @Autowired
+
     private IPedidoRepository repository;
+    private IPedidoItemService pedidoItemService;
+    private IClienteRepository clienteRepository;
+    private IRestauranteRepository restauranteRepository;
 
-    public PedidoServiceImpl(IPedidoRepository restaurantRespository) {
-        this.repository = restaurantRespository;
+    @Autowired
+    public PedidoServiceImpl(IPedidoRepository pedidoRespository, PedidoItemServiceImpl pedidoItemService, IClienteRepository clienreRepository, IRestauranteRepository restauranteRepository) {
+        this.repository = pedidoRespository;
+        this.pedidoItemService = pedidoItemService;
+        this.clienteRepository = clienreRepository;
+        this.restauranteRepository = restauranteRepository;
     }
 
-    public PedidoServiceImpl() {
-        super();
-    }
+    @Override
+    @Transactional
+    public Long cadastrarPedido(PedidoDTO pedidodto) {
 
-    public PedidoModel create(PedidoModel pedido) {
-        return repository.save(pedido);
+        ClienteModel cliente = clienteRepository.findById(pedidodto.getClienteId()).orElseThrow(() -> new EntityNotFoundException("Ciente não encontrado"));
+
+        ModelMapper modelMapper = new ModelMapper();
+        PedidoModel pedido = modelMapper.map(pedidodto, PedidoModel.class);
+        PedidoModel pedidoSalvo = repository.save(pedido);
+        pedidoItemService.cadastrarItens(pedidodto.getItens(), pedidoSalvo);
+        return pedidoSalvo.getId();
     }
 
     public PedidoModel update(PedidoModel pedido) {

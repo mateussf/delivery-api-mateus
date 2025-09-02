@@ -5,26 +5,26 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.deliverytech.delivery.dto.PedidoDTO;
 import com.deliverytech.delivery.dto.PedidoItemDTO;
 import com.deliverytech.delivery.model.PedidoItemModel;
+import com.deliverytech.delivery.model.PedidoModel;
 import com.deliverytech.delivery.repository.IPedidoItemRepository;
 
 @Service
-public class PedidoItemService {
+public class PedidoItemServiceImpl implements IPedidoItemService{
 
     @Autowired
     private IPedidoItemRepository repository;
 
-    public PedidoItemService(IPedidoItemRepository pedidoItemRepository) {
+    public PedidoItemServiceImpl(IPedidoItemRepository pedidoItemRepository) {
         this.repository = pedidoItemRepository;
     }
 
-    public PedidoItemService() {
-        super();
-    }
 
     public List<PedidoItemDTO> findAll() {
         return repository.findAll().stream().map(this::ConvertEntityToDTO).collect(Collectors.toList());
@@ -39,6 +39,14 @@ public class PedidoItemService {
 
 
         return dto;
+    }
+
+    public void cadastrarItens(List<PedidoItemDTO> itens, PedidoModel pedido ) {
+        for (PedidoItemDTO itemDTO : itens) {
+            PedidoItemModel item = new ModelMapper().map(itemDTO, PedidoItemModel.class);
+            item.setPedido(pedido); // Associa o item ao pedido
+            repository.save(item);
+        }
     }
 
 }

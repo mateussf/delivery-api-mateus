@@ -4,15 +4,15 @@ import lombok.Data;
 
 @Data
 public class RestauranteDTO {
-    private String name;
-    private String address;
-    private String phone;
+    private String nome;
+    private String endereco;
+    private String telefone;
     private String email;
-    private String description;
+    private String descricao;
 
-    public RestauranteDTO(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public RestauranteDTO(String nome, String descricao) {
+        this.nome = nome;
+        this.descricao = descricao;
     }
 
     public RestauranteDTO() {
@@ -22,8 +22,8 @@ public class RestauranteDTO {
     @Override
     public String toString() {
         return "RestauranteDTO{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "name='" + nome + '\'' +
+                ", description='" + descricao + '\'' +
                 '}';
     }
 }

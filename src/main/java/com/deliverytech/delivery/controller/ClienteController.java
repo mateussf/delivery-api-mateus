@@ -70,4 +70,6 @@ public class ClienteController {
     public String desativarCliente(@PathVariable Long id) {
         return clienteService.desativarCliente(id);
     }
+
+
 }

@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,9 +26,13 @@ public class ProdutoModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private BigDecimal preco;
     private String categoria;
+    private BigDecimal preco;
     private boolean disponivel;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private CategoriaModel categoria_produto;
 
     @ManyToOne
     @JoinColumn(name = "restaurante_id")

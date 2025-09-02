@@ -36,7 +36,7 @@ public class PedidoModel {
     private BigDecimal subtotal;
     private BigDecimal taxaEntrega;
     private BigDecimal valorTotal;
-    private BigDecimal preco;
+    //private BigDecimal preco;
     private boolean disponivel;
 
     @ManyToOne
