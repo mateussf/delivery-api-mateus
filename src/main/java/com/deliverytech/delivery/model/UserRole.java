@@ -1,16 +1,19 @@
 package com.deliverytech.delivery.model;
 
+
+
 public enum UserRole {
     ADMIN("admin"),
-    USER("user");
+    USER("user"),
+    GUEST("ROLE_GUEST");
 
     private String role;
 
-    UserRole(String role){
+    UserRole(String role) {
         this.role = role;
     }
 
-    public String getRole(){
+    public String getRole() {
         return role;
     }
 }
